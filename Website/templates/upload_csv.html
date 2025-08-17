@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+| Upload CSV
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h2 class="mb-4">📤 Upload Your Property Data</h2>
+
+    <form action="/upload_csv" method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 500px;">
+        <div class="mb-3">
+            <label for="csvFile" class="form-label">Choose a CSV file:</label>
+            <input class="form-control" type="file" id="csvFile" name="csvFile" accept=".csv" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Upload and Predict</button>
+    </form>
+
+    <div class="mt-4 text-muted small">
+        <p><strong>Note:</strong> Make sure your CSV format matches the required structure for predictions.</p>
+    </div>
+</div>
+{% endblock %}

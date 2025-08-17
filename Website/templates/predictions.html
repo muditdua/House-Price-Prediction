@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}| Predictions{% endblock %}
+
+{% block main %}
+<h2 class="mb-4">📁 Your Uploaded Predictions</h2>
+
+{% if files %}
+<ul class="list-group mb-5">
+        {% for file in files %}
+        <li class="list-group-item bg-primary text-white d-flex justify-content-between align-items-center">
+        <div>
+            <strong>{{ file.filename }}</strong><br>
+            <small class="text-white-50">Uploaded at: {{ file.uploaded_at[:19].replace("T", " ") }}</small>
+        </div>
+
+        <div class="d-flex gap-2">
+            <!-- View Button (white bg, black text) -->
+            <a href="{{ url_for('predictions', file=file.filename) }}" class="btn btn-light btn-sm text-dark">
+                🔍 View
+            </a>
+
+            <!-- Delete Button (red bg, white text) -->
+            <form action="{{ url_for('delete_prediction') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this prediction?');" class="m-0">
+                <input type="hidden" name="filename" value="{{ file.filename }}">
+                <button type="submit" class="btn btn-danger btn-sm text-white">
+                    🗑️ Delete
+                </button>
+            </form>
+        </div>
+    </li>
+        {% endfor %}
+</ul>
+{% else %}
+<p>No predictions found yet. Try uploading a CSV first!</p>
+{% endif %}
+
+{% if columns and rows %}
+<hr>
+<h2 class="mb-4">📊 Predictions from <code>{{ current_file }}</code></h2>
+
+<!-- Download Button -->
+<div class="mb-3">
+    <a href="{{ url_for('download_predictions', file=current_file) }}" class="btn btn-success">
+    📥 Download CSV
+</a>
+</div>
+
+<!-- Loading Spinner -->
+<div id="loading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Loading predictions...</p>
+</div>
+
+<!-- DataTable -->
+<div class="table-responsive" style="display: none;" id="table-container">
+    <table id="predictionTable" class="table table-striped table-bordered display">
+        <thead class="table-light">
+            <tr>
+                {% for col in columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for col in columns %}
+                    <td>{{ row[col] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- DataTables Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+<script>
+    $(document).ready(function () {
+        $('#predictionTable').DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50, 100],
+            order: [[0, 'asc']],
+            language: {
+                search: "🔍 Search:"
+            },
+            initComplete: function () {
+                $('#loading').hide();
+                $('#table-container').fadeIn();
+            }
+        });
+    });
+</script>
+{% endblock %}

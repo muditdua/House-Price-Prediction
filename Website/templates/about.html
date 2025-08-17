@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    | About
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <h1 class="mb-4">🏠 About House Price Predictor</h1>
+        <p class="lead">
+            House Price Predictor is a machine learning web application that helps estimate the prices of homes based on a wide range of features.
+        </p>
+        <hr>
+        <h4>🔍 How It Works:</h4>
+        <ul class="text-start list-unstyled text-center mx-auto">
+            <li>You upload a CSV file containing property data.</li>
+            <li>The data is cleaned and processed using a pre-trained model.</li>
+            <li>The app predicts house prices and returns a CSV with the results.</li>
+        </ul>
+        <div class="mt-5">
+        <h4>⚙️ Technologies Used:</h4>
+        <ul class="text-start list-unstyled text-center mx-auto" >
+            <li>Python, Pandas, NumPy</li>
+            <li>LightGBM for prediction</li>
+            <li>Flask for the web interface</li>
+            <li>Bootstrap for styling</li>
+            <li>Papermill for notebook execution</li>
+        </ul>
+        </div>
+        <div class="mt-5">
+        <h4>👨‍💻 Developer:</h4>
+        <p>Created as a part of a machine learning project submission. Built with ❤️ and coffee!</p>
+        </div>
+    </div>
+{% endblock %}
