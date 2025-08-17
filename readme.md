@@ -1,7 +1,7 @@
 # House price Prediction Using Machine Learning
 #### Video Demo:  <URL HERE>
 ## Description: 
-1. Its a machine learning model based on LGBM Quantile Regression Model. It uses a listing of previous prices and trains itself on various listing provided by a CSV file.
+1. Its a machine learning model based on LightGBM Quantile Regression Model. It uses a listing of previous prices and trains itself on various listing provided by a CSV file.
 2. It Gives a predicted price by comparing various factors.
    a) Bedrooms and Bathrooms
    b) House and Acre Size
