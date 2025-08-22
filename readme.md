@@ -3,10 +3,10 @@
 ## Description: 
 1. Its a machine learning model based on LightGBM Quantile Regression Model. It uses a listing of previous prices and trains itself on various listing provided by a CSV file.
 2. It Gives a predicted price by comparing various factors.
-   a) Bedrooms and Bathrooms
-   b) House and Acre Size
-   c) Prices of houses with same factors
-   d) Comparing prices of houses with same factors in same locality
+   - **Bedrooms and Bathrooms**  
+   - **House and Acre Size**  
+   - **Prices of houses with same factors**  
+   - **Comparing prices of houses with same factors in same locality**
 3. The Website is based on flask, it uses a login system to simplify access to many users at once.
 4. I have used the existing files from CS50 provided in the PSET #9 Finance : cs50(module), apology.py, helpers.py
 5. Users can upload a CSV file in the required format to recieve predictions.
