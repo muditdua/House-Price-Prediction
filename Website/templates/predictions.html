@@ -15,12 +15,10 @@
         </div>
 
         <div class="d-flex gap-2">
-            <!-- View Button (white bg, black text) -->
             <a href="{{ url_for('predictions', file=file.filename) }}" class="btn btn-light btn-sm text-dark">
                 🔍 View
             </a>
 
-            <!-- Delete Button (red bg, white text) -->
             <form action="{{ url_for('delete_prediction') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this prediction?');" class="m-0">
                 <input type="hidden" name="filename" value="{{ file.filename }}">
                 <button type="submit" class="btn btn-danger btn-sm text-white">
@@ -46,7 +44,6 @@
 </a>
 </div>
 
-<!-- Loading Spinner -->
 <div id="loading" class="text-center my-5">
     <div class="spinner-border text-primary" role="status"></div>
     <p class="mt-2">Loading predictions...</p>
@@ -75,7 +72,6 @@
 </div>
 {% endif %}
 
-<!-- DataTables Scripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
