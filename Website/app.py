@@ -151,6 +151,7 @@ def upload_csv():
 @app.route("/process")
 @login_required
 def process():
+    #used chatgpt to run jupyter notebooks from a python file
     msg = request.args.get("msg")
     if msg == "success":
         flash("✅ File processed successfully!")
