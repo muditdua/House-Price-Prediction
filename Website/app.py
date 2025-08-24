@@ -32,7 +32,6 @@ def login():
     if msg:
         flash(msg)
 
-    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
@@ -42,7 +41,6 @@ def login():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
-        # Query database for username
         rows = db.execute(
             "SELECT * FROM users WHERE username = ?", request.form.get("username")
         )
@@ -59,7 +57,6 @@ def login():
         # Redirect user to home page
         return redirect("/")
 
-    # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("login.html")
 
@@ -157,12 +154,11 @@ def process():
     msg = request.args.get("msg")
     if msg == "success":
         flash("✅ File processed successfully!")
-    # Make sure the filename is in session (set during /upload_csv)
+    # Make sure the filename is in session 
     if "uploaded_filename" not in session:
         flash("No uploaded file found. Please upload a CSV first.")
         return redirect(url_for("upload_csv"))
 
-    # Full path to uploaded file
     try:
         pm.execute_notebook(
             input_path="clean.ipynb",
@@ -195,7 +191,6 @@ def predictions():
         flash("⚠️ You haven't uploaded any predictions yet.")
         return redirect("/upload_csv")
 
-    # Get selected file from URL or default to most recent
     filename = request.args.get("file") or prediction_files[0]["filename"]
     file_path = os.path.join("predictions", filename)
     try:
@@ -238,7 +233,6 @@ def delete_prediction():
         flash("❌ No file selected to delete.")
         return redirect(url_for("predictions"))
 
-    # Ensure user owns the file
     row = db.execute(
         "SELECT * FROM predictions WHERE user_id = ? AND filename = ?",
         session["user_id"], filename
@@ -247,12 +241,10 @@ def delete_prediction():
         flash("❌ You don't have permission to delete this file.")
         return redirect(url_for("predictions"))
 
-    # Delete from filesystem
     file_path = os.path.join("predictions", filename)
     if os.path.exists(file_path):
         os.remove(file_path)
 
-    # Delete from database
     db.execute(
         "DELETE FROM predictions WHERE user_id = ? AND filename = ?",
         session["user_id"], filename
