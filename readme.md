@@ -22,3 +22,14 @@
 2) Clean.ipynb is used when the website is running and it makes a prediction.
 3) The training and predicting have been separated to prevent retraining repeatedly and reduce time.
 4) Users can upload a CSV file(in the required format) in the Upload CSV section to create predictions and can view the predictions in the website itself or download it.
+
+## Connect with me
+Linkedin : https://www.linkedin.com/in/mudit-dua-2a30a1223/
+
+Email : muditdua2007@gmail.com
+
+Edx Username : Mudit_dua
+
+Github Username : mudit-dua
+
+
